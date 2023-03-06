@@ -1,0 +1,40 @@
+* 循环语句的使用
+#+begin_src python
+  while True:
+        print('who are you?')
+        name = input()
+        if name != 'youfucai':
+             continue
+        print('hello, youfucai. Waht's the passwrod(it is a fish.)')
+        password = input()
+        if password == 'bigboy':
+           break
+  print('Access granted.')
+#+end_src
+
+* for循环的range条件设置和while等价的使用
+#+begin_center Range function
+for i in range(循环起始值，循环终止值，每次循环变化步数(正负均可)):
+#+end_center
+#+begin_src python
+  sum = 0
+  for i in range(11):
+      print('Jimmy times (' + str(i) ')')
+      sum = sum +i
+  print('the final numer of sum is: ' + str(sum) + '.')
+#+end_src
+#+begin_src pyrhon
+  sum1 = 0
+  i = 0
+  while i < 11:
+      print('Jimmy times (' + str(i) ')')
+      i = i + 1
+  print('the final numer of sum is: ' + str(sum1) + '.')
+#+end_src
+
+* 函数定义
+#+begin_src python
+  def printHello(name):
+      print('hello' + name + '!')
+      print('you are shy' + name + '!')
+#+end_src
