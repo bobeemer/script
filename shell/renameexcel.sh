@@ -40,7 +40,7 @@ function loop_str_rename(){
 
                 #while [[ $curr_obj =~ $find_str ]]
                 #do
-                    rename 's/'$find_str'//' $curr_obj
+                rename 's/'$find_str'//' $curr_obj
                 #done
                 # if [ $? -eq 0 ]
                 # then
@@ -128,14 +128,29 @@ function get_all_name(){
 }
 
 
-# work_path=$(pwd)
-# excel_path=/Users/jdrqs/Documents/技经评审/待整理/造价文件补表/造价文件
-# app_path=/Users/jdrqs/Documents/技经评审/待整理/造价文件补表/APP
+work_path=$(pwd)
+excel_path=/Users/jdrqs/Documents/技经评审/待整理/造价文件补表/造价文件
+app_path=/Users/jdrqs/Documents/技经评审/待整理/造价文件补表/APP
+tmp_path=/Users/jdrqs/Documents/技经评审/待整理/造价文件补表/APP/配网批量创建模板
 loop_str_rename
-#get_all_name $work_path
-# mv $work_path/*.xl* $excel_path/
-# cd $app_path 
-# ./配网补表
-# mv $excel_path/*.xl* $work_path/
-# cd $work_path
+get_all_name $work_path
+echo "-----Start fill excel-----------"
+mv $work_path/*.xl* $excel_path/
+cd $app_path  && ./配网补表
+mv $excel_path/*.xl* $work_path/
+cd $work_path
+echo "-----Start get temple-----------"
+cp -r $tmp_path/批次附件 $work_path
+par_dir_name=`pwd | awk -F "/" '{print $NF}'`
+echo "$par_dir_name ---ok"
+if [[  $par_dir_name == *估算* ]]
+then
+    rm -f $work_path/批次附件/评审明细表.xlsx
+elif [[ $par_dir_name == *估算* ]]
+then
+    rm -f $work_path/批次附件/可行性研究明细表.xlsx
+else
+    echo "dir name is erro, please check."
+fi
+
 
